@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Abstractions" />
+      <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" />
+      <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Storage.Blobs" />
+      <PackageReference Include="Microsoft.IdentityModel.Protocols" />
+      <PackageReference Include="Newtonsoft.Json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj" />
+    </ItemGroup>
+
+</Project>

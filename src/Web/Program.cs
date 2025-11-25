@@ -88,6 +88,7 @@ builder.Services.AddMetronome();
 builder.AddSeqEndpoint(connectionName: "seq");
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
