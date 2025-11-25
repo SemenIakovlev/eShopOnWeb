@@ -2,11 +2,13 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
+        <AzureFunctionsVersion>v4</AzureFunctionsVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.Azure.Functions.Worker.Core" />
       <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Abstractions" />
       <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" />
       <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Storage.Blobs" />
@@ -17,5 +19,14 @@
     <ItemGroup>
       <ProjectReference Include="..\ApplicationCore\ApplicationCore.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <None Update="host.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="local.settings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      </None>
+  </ItemGroup>
 
 </Project>
