@@ -1,0 +1,22 @@
+{
+    "version": "2.0",
+    "extensions": {
+        "http": {
+          "routePrefix": "api"
+        }
+      },
+      "masterKey": {
+        "name": "master",
+        "value": "1234"
+      },
+    "functionTimeout": "00:05:00",
+    "logging": {
+        "applicationInsights": {
+            "samplingSettings": {
+                "isEnabled": true,
+                "excludedTypes": "Request"
+            },
+            "enableLiveMetricsFilters": true
+        }
+    }
+}

@@ -8,9 +8,7 @@ namespace AzureFunctions;
 public static class OrderItemsReserver
 {
     [Function("OrderItemsReserver")]
-    public static async Task<HttpResponseData> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post")]
-        HttpRequestData req)
+    public static async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
     {
         var body = await req.ReadAsStringAsync() ?? String.Empty;
         var order = JsonConvert.DeserializeObject<OrderDto>(body);
