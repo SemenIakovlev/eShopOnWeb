@@ -9,7 +9,7 @@ public static class OrderItemsReserver
 {
     [Function("OrderItemsReserver")]
     public static async Task<HttpResponseData> Run(
-        [HttpTrigger(AuthorizationLevel.Function, "post")]
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post")]
         HttpRequestData req)
     {
         var body = await req.ReadAsStringAsync() ?? String.Empty;
