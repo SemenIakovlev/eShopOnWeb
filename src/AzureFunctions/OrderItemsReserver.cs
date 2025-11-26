@@ -8,14 +8,31 @@ namespace AzureFunctions;
 public static class OrderItemsReserver
 {
     [Function("OrderItemsReserver")]
-    public static async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
+    public static async Task<OrderResponse> Run(
+        [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
     {
-        var body = await req.ReadAsStringAsync() ?? String.Empty;
+        var body = await req.ReadAsStringAsync() ?? string.Empty;
         var order = JsonConvert.DeserializeObject<OrderDto>(body);
-        var response = req.CreateResponse();
-        var result = new OrderResponse { OrderJson = JsonConvert.SerializeObject(order) };
-        await response.WriteStringAsync(JsonConvert.SerializeObject(result));
+        if (order == null)
+        {
+            var badResponse = req.CreateResponse(System.Net.HttpStatusCode.BadRequest);
+            await badResponse.WriteStringAsync("Invalid order data.");
+            return new OrderResponse
+            {
+                Id = 0,
+                OrderJson = string.Empty,
+                HttpResponse = badResponse
+            };
+        }
 
-        return response;
+        var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
+        await response.WriteStringAsync($"Order {order.Id} saved.");
+
+        return new OrderResponse
+        {
+            Id = order.Id,
+            OrderJson = JsonConvert.SerializeObject(order),
+            HttpResponse = response
+        };
     }
 }

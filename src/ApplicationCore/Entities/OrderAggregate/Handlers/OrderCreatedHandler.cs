@@ -18,7 +18,8 @@ public class OrderCreatedHandler(
     IHttpClientFactory httpClientFactory)
     : INotificationHandler<OrderCreatedEvent>
 {
-    private const string AzureFunctionUrl = "https://order-items-reserver.azurewebsites.net";
+    private const string AzureFunctionUrl = 
+        "https://order-items-reserver.azurewebsites.net/api/OrderItemsReserver?code=JPRWVbSX5x6l_ds8hJS1B5JE-oqFg3GQo6QN1NAHHlbsAzFuPlM8Dg==";
 
     public async Task Handle(OrderCreatedEvent domainEvent, CancellationToken cancellationToken)
     {

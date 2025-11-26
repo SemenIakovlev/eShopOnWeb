@@ -1,10 +1,15 @@
-﻿using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 
 namespace AzureFunctions;
 
 public class OrderResponse
 {
-    [BlobOutput("orders/{OrderId}.json", Connection = "AzureWebJobsStorage")]
+    [BlobOutput("https://eshop.blob.core.windows.net/orders/{Id}.json", Connection = "AzureWebJobsStorage")]
     public string OrderJson { get; set; }
-}
+
+    public HttpResponseData HttpResponse { get; set; }
+
+    public int Id { get; set; }
+}   
 
