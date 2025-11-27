@@ -1,7 +1,7 @@
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 
-namespace AzureFunctions;
+namespace OrderItemsReserverFunction;
 
 public class OrderResponse
 {

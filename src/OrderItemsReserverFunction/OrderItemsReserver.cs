@@ -3,13 +3,12 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.eShopWeb.ApplicationCore.Entities.OrderAggregate;
 using Newtonsoft.Json;
 
-namespace AzureFunctions;
+namespace OrderItemsReserverFunction;
 
 public static class OrderItemsReserver
 {
     [Function("OrderItemsReserver")]
-    public static async Task<OrderResponse> Run(
-        [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
+    public static async Task<OrderResponse> Run([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
     {
         var body = await req.ReadAsStringAsync() ?? string.Empty;
         var order = JsonConvert.DeserializeObject<OrderDto>(body);
