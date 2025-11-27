@@ -26,8 +26,6 @@ public class OrdersFunction(Container container, ILoggerFactory loggerFactory)
                 await bad.WriteStringAsync("Invalid order payload.");
                 return bad;
             }
-
-            var total = order.OrderItems.Sum(i => i.UnitPrice * i.Units);
             var pk = new PartitionKey(order.BuyerId);
             var result = await container.CreateItemAsync(MapToCosmosOrder(order), pk);
             var resp = req.CreateResponse(HttpStatusCode.Created);
@@ -35,7 +33,6 @@ public class OrdersFunction(Container container, ILoggerFactory loggerFactory)
             {
                 id = result.Resource.Id,
                 customerId = order.BuyerId,
-                finalPrice = Math.Round(total, 2),
                 status = "Created"
             }));
             return resp;
@@ -63,9 +60,9 @@ public class OrdersFunction(Container container, ILoggerFactory loggerFactory)
             Id = Guid.NewGuid().ToString(),
             OrderId = source.Id,
             CustomerId = source.BuyerId,
-            OrderDate = source.OrderDate,
             ShipToAddress = source.ShipToAddress,
-            OrderItems = source.OrderItems
+            OrderItems = source.OrderItems,
+            FinalPrice = Math.Round(source.OrderItems.Sum(i => i.UnitPrice * i.Units), 2),
         };
     }
 }
